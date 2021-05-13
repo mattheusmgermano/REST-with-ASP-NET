@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "iPERdwLcqNo93OjfzcAvj5QcQsB51NLr5j/+8dWIJsfz4JcyxqgW1Iz86da6ZuXiwfl5H4FxjXeSA9Lbsl1T8w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mattheus.martins\\Desktop\\NTLABS - .NET\\REST-with-ASP-Net\\REST-with-ASP-NET\\REST-with-ASP-NET\\REST-with-ASP-NET\\REST-with-ASP-NET.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
