@@ -26,6 +26,17 @@ namespace REST_with_ASP_NET.Controllers
             return OperacoesMatematicas(path, firstNumber, secondNumber);
         }
 
+
+        [HttpGet("sqrt/{firstNumber}")]
+        public IActionResult Sqrt(string firstNumber)
+        {
+            if (IsNumeric(firstNumber))
+            {
+                var sqrt = Math.Sqrt(ConvertToDouble(firstNumber));
+                return Ok(sqrt.ToString());
+            }
+            return BadRequest("Invalid input.");
+        }
         private IActionResult OperacoesMatematicas(string path, string firstNumber, string secondNumber)
         {
             switch (path)
@@ -73,17 +84,6 @@ namespace REST_with_ASP_NET.Controllers
                 default:
                     return BadRequest("Invalid input.");
             }
-        }
-
-        [HttpGet("sqrt/{firstNumber}")]
-        public IActionResult Sqrt(string firstNumber)
-        {
-            if (IsNumeric(firstNumber))
-            {
-                var sqrt = Math.Sqrt(ConvertToDouble(firstNumber));
-                return Ok(sqrt.ToString());
-            }
-            return BadRequest("Invalid input.");
         }
         private decimal ConvertToDecimal(string strNumber)
         {
