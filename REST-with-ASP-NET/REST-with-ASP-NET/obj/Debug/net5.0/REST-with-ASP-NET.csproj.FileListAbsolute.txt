@@ -27,3 +27,11 @@ C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-
 C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\obj\Debug\net5.0\ref\REST-with-ASP-NET.dll
 C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\obj\Debug\net5.0\REST-with-ASP-NET.pdb
 C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\obj\Debug\net5.0\REST-with-ASP-NET.genruntimeconfig.cache
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\MySqlConnector.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET\REST-with-ASP-NET\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll
