@@ -7,29 +7,32 @@ using System.Linq;
 
 namespace REST_with_ASP_NET.Business.Implementations
 {
-    public class PersonBusinessImplementation : IPersonBusiness
+    public class BooksBusinessImplementation : IBooksBusiness
     {
-        private readonly IPersonRepository _repository;
-        public PersonBusinessImplementation(IPersonRepository repository)
+        private readonly IBooksRepository _repository;
+        public BooksBusinessImplementation(IBooksRepository repository)
         {
             _repository = repository;
         }
-        public List<Person> FindAll()
+        public List<Book> FindAll()
         {
             return _repository.FindAll(); ;
         }
-
-        public Person FindByID(long id)
+        public Book FindByAuthor(string author)
+        {
+            return _repository.FindByAuthor(author); ;
+        }
+        public Book FindByID(long id)
         {
             return _repository.FindByID(id); ;
         }
-        public Person Create(Person person)
+        public Book Create(Book Book)
         {
-            return _repository.Create(person);
+            return _repository.Create(Book);
         }
-        public Person Update(Person person)
+        public Book Update(Book Book)
         {
-            return _repository.Update(person);
+            return _repository.Update(Book);
         }
 
         public void Delete(long id)

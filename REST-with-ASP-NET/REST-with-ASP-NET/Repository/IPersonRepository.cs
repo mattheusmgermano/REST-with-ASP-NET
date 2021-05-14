@@ -10,5 +10,6 @@ namespace REST_with_ASP_NET.Repository
         List<Person> FindAll();
         Person Update(Person person);
         void Delete(long id);
+        bool Exists(long id);
     }
 }
