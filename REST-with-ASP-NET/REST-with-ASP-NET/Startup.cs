@@ -8,11 +8,10 @@ using Microsoft.OpenApi.Models;
 using REST_with_ASP_NET.Model.Context;
 using REST_with_ASP_NET.Business;
 using REST_with_ASP_NET.Business.Implementations;
-using REST_with_ASP_NET.Repository;
-using REST_with_ASP_NET.Repository.Implementations;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using REST_with_ASP_NET.Repository.Generic;
 
 namespace REST_with_ASP_NET
 {
@@ -51,10 +50,10 @@ namespace REST_with_ASP_NET
 
             //Dependency injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             //Dependency injection
             services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
-            services.AddScoped<IBooksRepository, BooksRepositoryImplementation>();
+            //Dependency Injection using Generic Repositories
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 
             services.AddSwaggerGen(c =>

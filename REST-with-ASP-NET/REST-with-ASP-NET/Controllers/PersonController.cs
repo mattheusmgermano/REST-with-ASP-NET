@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using REST_with_ASP_NET.Model;
 using REST_with_ASP_NET.Business;
+using REST_with_ASP_NET.Data.VO;
 
 namespace REST_with_ASP_NET.Controllers
 {
@@ -34,14 +35,14 @@ namespace REST_with_ASP_NET.Controllers
             return Ok(person);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));

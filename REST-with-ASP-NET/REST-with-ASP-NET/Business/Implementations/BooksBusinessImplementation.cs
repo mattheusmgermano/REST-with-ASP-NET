@@ -1,6 +1,9 @@
-﻿using REST_with_ASP_NET.Model;
+﻿using REST_with_ASP_NET.Data.Converter;
+using REST_with_ASP_NET.Data.VO;
+using REST_with_ASP_NET.Model;
 using REST_with_ASP_NET.Model.Context;
 using REST_with_ASP_NET.Repository;
+using REST_with_ASP_NET.Repository.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +12,32 @@ namespace REST_with_ASP_NET.Business.Implementations
 {
     public class BooksBusinessImplementation : IBooksBusiness
     {
-        private readonly IBooksRepository _repository;
-        public BooksBusinessImplementation(IBooksRepository repository)
+        private readonly IRepository<Book> _repository;
+        private readonly BooksConverter _converter;
+        public BooksBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
+            _converter = new BooksConverter();
         }
-        public List<Book> FindAll()
+        public List<BooksVO> FindAll()
         {
-            return _repository.FindAll(); ;
+            return _converter.Parse(_repository.FindAll());
         }
-        public Book FindByAuthor(string author)
+        public BooksVO FindByID(long id)
         {
-            return _repository.FindByAuthor(author); ;
+            return _converter.Parse(_repository.FindByID(id));
         }
-        public Book FindByID(long id)
+        public BooksVO Create(BooksVO book)
         {
-            return _repository.FindByID(id); ;
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Create(bookEntity);
+            return _converter.Parse(bookEntity);
         }
-        public Book Create(Book Book)
+        public BooksVO Update(BooksVO book)
         {
-            return _repository.Create(Book);
-        }
-        public Book Update(Book Book)
-        {
-            return _repository.Update(Book);
+            var bookEntity = _converter.Parse(book);
+            bookEntity = _repository.Update(bookEntity);
+            return _converter.Parse(bookEntity);
         }
 
         public void Delete(long id)

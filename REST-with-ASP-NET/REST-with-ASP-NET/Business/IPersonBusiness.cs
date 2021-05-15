@@ -1,14 +1,15 @@
-﻿using REST_with_ASP_NET.Model;
+﻿using REST_with_ASP_NET.Data.VO;
+using REST_with_ASP_NET.Model;
 using System.Collections.Generic;
 
 namespace REST_with_ASP_NET.Business
 {
     public interface IPersonBusiness
     {
-        Person Create(Person person);
-        Person FindByID(long id);
-        List<Person> FindAll();
-        Person Update(Person person);
+        PersonVO Create(PersonVO person);
+        PersonVO FindByID(long id);
+        List<PersonVO> FindAll();
+        PersonVO Update(PersonVO person);
         void Delete(long id);
     }
 }
