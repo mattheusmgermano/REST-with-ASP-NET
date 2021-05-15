@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace REST_with_ASP_NET.Hypermedia.Enricher
 {
-    public class PersonEnricher : ContentResponseEnricher<PersonVO>
+    public class BooksEnricher : ContentResponseEnricher<BooksVO>
     {
+
         private readonly object _lock = new object();
-        protected override Task EnrichModel(PersonVO content, IUrlHelper urlHelper)
+        protected override Task EnrichModel(BooksVO content, IUrlHelper urlHelper)
         {
-            var path = "api/person/v1";
+            var path = "api/books/v1";
             string link = GetLink(content.Id, urlHelper, path);
             content.Links.Add(new HyperMediaLink()
             {
@@ -58,7 +59,7 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 var url = new { controller = path, id = id };
                 return new StringBuilder(urlHelper.Link("DefaultApi", url))
                     .Replace("%2F", "/").ToString();
-            }
+            };
         }
     }
 }

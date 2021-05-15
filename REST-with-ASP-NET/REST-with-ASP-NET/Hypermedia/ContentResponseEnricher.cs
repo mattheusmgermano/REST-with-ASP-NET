@@ -22,7 +22,10 @@ namespace REST_with_ASP_NET.Hypermedia
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
         bool IResponseEnricher.CanEnrich(ResultExecutingContext response)
         {
-            if (response.Result is OkObjectResult okObjectResult) return CanEnrich(okObjectResult.Value.GetType());
+            if (response.Result is OkObjectResult okObjectResult)
+            {
+                return CanEnrich(okObjectResult.Value.GetType());
+            }
             return false;
         }
         public async Task Enrich(ResultExecutingContext response)
@@ -30,11 +33,10 @@ namespace REST_with_ASP_NET.Hypermedia
             var urlHelper = new UrlHelperFactory().GetUrlHelper(response);
             if (response.Result is OkObjectResult okObjectResult)
             {
-                if(okObjectResult.Value is T model)
+                if (okObjectResult.Value is T model)
                 {
                     await EnrichModel(model, urlHelper);
-                } 
-                else if(okObjectResult.Value is List<T> collection)
+                } else if (okObjectResult.Value is List<T> collection)
                 {
                     ConcurrentBag<T> bag = new ConcurrentBag<T>(collection);
                     Parallel.ForEach(bag, (element) => EnrichModel(element, urlHelper));

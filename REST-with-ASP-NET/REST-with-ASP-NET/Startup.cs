@@ -13,6 +13,9 @@ using System;
 using System.Collections.Generic;
 using REST_with_ASP_NET.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using REST_with_ASP_NET.Hypermedia.Filters;
+using REST_with_ASP_NET.Hypermedia.Enricher;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace REST_with_ASP_NET
 {
@@ -34,12 +37,19 @@ namespace REST_with_ASP_NET
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
 
             services.AddControllers();
 
             var connection = Configuration["MySQLConnection:MySQLConnectionString"];
             services.AddDbContext<MySQLContext>
-                (options => 
+                (options =>
                 options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
             if (Environment.IsDevelopment())
@@ -54,6 +64,12 @@ namespace REST_with_ASP_NET
                 options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
             }).AddXmlSerializerFormatters();
 
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ContentResponseEnricherList.Add(new BooksEnricher());
+
+            services.AddSingleton(filterOptions);
+
             //Versioning API
             services.AddApiVersioning();
 
@@ -67,7 +83,18 @@ namespace REST_with_ASP_NET
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "REST_with_ASP_NET", Version = "v1" });
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "REST Api from zero to Azure with ASP .NET Core 5 and Docker",
+                        Version = "v1",
+                        Description = "API RESTful",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Mattheus Germano",
+                            Url = new Uri("https://github.com/mattheusmgermano/REST-with-ASP-NET ")
+                        }
+                    });
             });
         }
 
@@ -86,11 +113,20 @@ namespace REST_with_ASP_NET
 
             app.UseRouting();
 
+            app.UseCors();  //DEVE FICAR APÓS HTTP RED E USEROUT
+            
+            //
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+            //
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }
         private void MigrateDatabase(string connection)
