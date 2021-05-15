@@ -25,9 +25,9 @@ namespace REST_with_ASP_NET.Repository.Generic
                 dataset.Add(item);
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             return item;
         }
@@ -61,9 +61,9 @@ namespace REST_with_ASP_NET.Repository.Generic
                     dataset.Remove(result);
                     _context.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
         }

@@ -12,6 +12,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using REST_with_ASP_NET.Repository.Generic;
+using Microsoft.Net.Http.Headers;
 
 namespace REST_with_ASP_NET
 {
@@ -45,6 +46,14 @@ namespace REST_with_ASP_NET
             {
                 MigrateDatabase(connection);
             }
+
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            }).AddXmlSerializerFormatters();
+
             //Versioning API
             services.AddApiVersioning();
 
