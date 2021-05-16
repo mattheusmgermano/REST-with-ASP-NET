@@ -16,6 +16,15 @@ using Microsoft.Net.Http.Headers;
 using REST_with_ASP_NET.Hypermedia.Filters;
 using REST_with_ASP_NET.Hypermedia.Enricher;
 using Microsoft.AspNetCore.Rewrite;
+using REST_with_ASP_NET.Services.Implementations;
+using REST_with_ASP_NET.Services;
+using REST_with_ASP_NET.Repository;
+using REST_with_ASP_NET.Configurations;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace REST_with_ASP_NET
 {
@@ -37,6 +46,36 @@ namespace REST_with_ASP_NET
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var tokenConfigurations = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(Configuration.GetSection("TokenConfigurations")).Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfigurations.Issuer,
+                    ValidAudience = tokenConfigurations.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                };
+            });
+
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+
             services.AddCors(options =>
             options.AddDefaultPolicy(builder =>
             {
@@ -75,9 +114,17 @@ namespace REST_with_ASP_NET
 
             //Dependency injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            //Dependency injection
+
             services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
-            //Dependency Injection using Generic Repositories
+
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+
+            services.AddTransient<ITokenService, TokenService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IPersonRepository, PersonRepository>();
+
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 

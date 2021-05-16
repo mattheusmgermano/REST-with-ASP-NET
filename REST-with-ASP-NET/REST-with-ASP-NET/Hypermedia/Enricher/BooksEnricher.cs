@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using REST_with_ASP_NET.Data.VO;
 using REST_with_ASP_NET.Hypermedia.Contants;
+using RestWithASPNETUdemy.Hypermedia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace REST_with_ASP_NET.Hypermedia.Enricher
 {
+
     public class BooksEnricher : ContentResponseEnricher<BooksVO>
     {
-
         private readonly object _lock = new object();
         protected override Task EnrichModel(BooksVO content, IUrlHelper urlHelper)
         {
             var path = "api/books/v1";
             string link = GetLink(content.Id, urlHelper, path);
+
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.GET,
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultGet
-
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -31,7 +32,6 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPost
-
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -39,7 +39,6 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPut
-
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -47,7 +46,6 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = "int"
-
             });
             return null;
         }
@@ -57,8 +55,7 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
             lock (_lock)
             {
                 var url = new { controller = path, id = id };
-                return new StringBuilder(urlHelper.Link("DefaultApi", url))
-                    .Replace("%2F", "/").ToString();
+                return new StringBuilder(urlHelper.Link("DefaultApi", url)).Replace("%2F", "/").ToString();
             };
         }
     }

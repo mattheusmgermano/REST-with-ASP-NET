@@ -10,6 +10,8 @@ namespace REST_with_ASP_NET.Business
         PersonVO FindByID(long id);
         List<PersonVO> FindAll();
         PersonVO Update(PersonVO person);
+
+        PersonVO Disable(long id);
         void Delete(long id);
     }
 }

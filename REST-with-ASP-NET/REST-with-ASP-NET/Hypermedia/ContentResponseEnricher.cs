@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace REST_with_ASP_NET.Hypermedia
+namespace RestWithASPNETUdemy.Hypermedia
 {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHyperMedia
     {
@@ -15,11 +15,13 @@ namespace REST_with_ASP_NET.Hypermedia
         {
 
         }
-        public bool CanEnrich(Type contentType)
+        public virtual bool CanEnrich(Type contentType)
         {
             return contentType == typeof(T) || contentType == typeof(List<T>);
         }
+
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
+
         bool IResponseEnricher.CanEnrich(ResultExecutingContext response)
         {
             if (response.Result is OkObjectResult okObjectResult)
@@ -39,7 +41,10 @@ namespace REST_with_ASP_NET.Hypermedia
                 } else if (okObjectResult.Value is List<T> collection)
                 {
                     ConcurrentBag<T> bag = new ConcurrentBag<T>(collection);
-                    Parallel.ForEach(bag, (element) => EnrichModel(element, urlHelper));
+                    Parallel.ForEach(bag, (element) =>
+                    {
+                        EnrichModel(element, urlHelper);
+                    });
                 }
             }
             await Task.FromResult<object>(null);

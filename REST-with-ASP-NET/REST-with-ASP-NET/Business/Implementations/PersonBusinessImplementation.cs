@@ -1,6 +1,7 @@
 ﻿using REST_with_ASP_NET.Data.Converter;
 using REST_with_ASP_NET.Data.VO;
 using REST_with_ASP_NET.Model;
+using REST_with_ASP_NET.Repository;
 using REST_with_ASP_NET.Repository.Generic;
 using System.Collections.Generic;
 
@@ -8,9 +9,9 @@ namespace REST_with_ASP_NET.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly PersonConverter _converter;
-        public PersonBusinessImplementation(IRepository<Person> repository)
+        public PersonBusinessImplementation(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -36,10 +37,16 @@ namespace REST_with_ASP_NET.Business.Implementations
             personEntity = _repository.Update(personEntity);
             return _converter.Parse(personEntity);
         }
+        public PersonVO Disable(long id)
+        {
+            var personEntity = _repository.Disable(id);
+            return _converter.Parse(personEntity);
+        }
 
         public void Delete(long id)
         {
             _repository.Delete(id);
         }
+
     }
 }

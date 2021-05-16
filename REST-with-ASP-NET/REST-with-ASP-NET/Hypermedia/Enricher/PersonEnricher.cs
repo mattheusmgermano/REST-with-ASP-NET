@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using REST_with_ASP_NET.Data.VO;
 using REST_with_ASP_NET.Hypermedia.Contants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using RestWithASPNETUdemy.Hypermedia;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,13 +14,13 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
         {
             var path = "api/person/v1";
             string link = GetLink(content.Id, urlHelper, path);
+
             content.Links.Add(new HyperMediaLink()
             {
                 Action = HttpActionVerb.GET,
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultGet
-
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -30,7 +28,6 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPost
-
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -38,7 +35,13 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = ResponseTypeFormat.DefaultPut
-
+            });
+            content.Links.Add(new HyperMediaLink()
+            {
+                Action = HttpActionVerb.PATCH,
+                Href = link,
+                Rel = RelationType.self,
+                Type = ResponseTypeFormat.DefaultPatch
             });
             content.Links.Add(new HyperMediaLink()
             {
@@ -46,7 +49,6 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
                 Href = link,
                 Rel = RelationType.self,
                 Type = "int"
-
             });
             return null;
         }
@@ -56,9 +58,8 @@ namespace REST_with_ASP_NET.Hypermedia.Enricher
             lock (_lock)
             {
                 var url = new { controller = path, id = id };
-                return new StringBuilder(urlHelper.Link("DefaultApi", url))
-                    .Replace("%2F", "/").ToString();
-            }
+                return new StringBuilder(urlHelper.Link("DefaultApi", url)).Replace("%2F", "/").ToString();
+            };
         }
     }
 }
