@@ -1,0 +1,15 @@
+services:
+  rest-with-asp-net:
+    build:
+      context: C:\Users\mattheus.martins\Desktop\NTLABS - .NET\REST-with-ASP-Net\REST-with-ASP-NET\REST-with-ASP-NET
+      dockerfile: REST-with-ASP-NET/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: restwithaspnet
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\mattheus.martins\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+version: '3.4'

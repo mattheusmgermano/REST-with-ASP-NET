@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IQ1SDeL4dU+De8ZquzSp2ugLHm7FbxnqMPxcqSlpY8CKESZ+cbwENUIUjU9KPPXq+X5LC0qmRAwPe6Bbou/bAA==",
+  "dgSpecHash": "aqYHGTIB5B+Dr3rwYDyZ71FnS8FasKVYHDZq5KNIC5mgn+gK62LCxhAlzs4/3RzsIw+z7Uzt2Y67hHGa+q+h6w==",
   "success": true,
   "projectFilePath": "C:\\Users\\mattheus.martins\\Desktop\\NTLABS - .NET\\REST-with-ASP-Net\\REST-with-ASP-NET\\REST-with-ASP-NET\\REST-with-ASP-NET\\REST-with-ASP-NET.csproj",
   "expectedPackageFiles": [
@@ -61,6 +61,7 @@
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.13\\microsoft.visualstudio.azure.containers.tools.targets.1.10.13.nupkg.sha512",
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\mysql.data\\8.0.25\\mysql.data.8.0.25.nupkg.sha512",
     "C:\\Users\\mattheus.martins\\.nuget\\packages\\mysqlconnector\\1.3.7\\mysqlconnector.1.3.7.nupkg.sha512",
