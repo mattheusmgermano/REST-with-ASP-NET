@@ -19,4 +19,4 @@ RUN dotnet publish "REST-with-ASP-NET.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "REST-with-ASP-NET.dll"]
+ENTRYPOINT ["dotnet", "REST-with-ASP-NET.dll",]
