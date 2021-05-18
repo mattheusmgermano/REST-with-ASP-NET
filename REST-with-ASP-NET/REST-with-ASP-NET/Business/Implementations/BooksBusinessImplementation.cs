@@ -1,5 +1,6 @@
 ﻿using REST_with_ASP_NET.Data.Converter;
 using REST_with_ASP_NET.Data.VO;
+using REST_with_ASP_NET.Hypermedia.Utils;
 using REST_with_ASP_NET.Model;
 using REST_with_ASP_NET.Model.Context;
 using REST_with_ASP_NET.Repository;
@@ -18,6 +19,31 @@ namespace REST_with_ASP_NET.Business.Implementations
         {
             _repository = repository;
             _converter = new BooksConverter();
+        }
+        public PagedSearchVO<BooksVO> FindWithPagedSearch(string title, string sortDirection, int pageSize, int page)
+        {
+            var sort = (!string.IsNullOrWhiteSpace(sortDirection)) && !sortDirection.Equals("desc") ? "asc" : "desc";
+            var size = (pageSize < 1) ? 10 : pageSize;
+            var offset = page > 0 ? (page - 1) * size : 0;
+
+            string query = @"select * from books p where 1 = 1 ";
+            if (!string.IsNullOrWhiteSpace(title)) query = query + $" and p.title like '%{title}%' ";
+            query += $" order by p.title {sort} limit {size} offset {offset}";
+
+            string countQuery = @"select count(*) from books p where 1 = 1 ";
+            if (!string.IsNullOrWhiteSpace(title)) countQuery = countQuery + $" and p.title like '%{title}%' ";
+
+            var books = _repository.FindWithPagedSearch(query);
+            int totalResults = _repository.GetCount(countQuery);
+
+            return new PagedSearchVO<BooksVO>
+            {
+                CurrentPage = page,
+                List = _converter.Parse(books),
+                PageSize = size,
+                SortDirections = sort,
+                TotalResults = totalResults
+            };  
         }
         public List<BooksVO> FindAll()
         {
@@ -44,5 +70,6 @@ namespace REST_with_ASP_NET.Business.Implementations
         {
             _repository.Delete(id);
         }
+
     }
 }

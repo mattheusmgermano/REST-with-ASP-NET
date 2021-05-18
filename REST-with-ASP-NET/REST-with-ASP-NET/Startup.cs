@@ -93,10 +93,10 @@ namespace REST_with_ASP_NET
                 (options =>
                 options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
-            //if (Environment.IsDevelopment())
-            //{
-            //    MigrateDatabase(connection);
-            //}
+            if (Environment.IsDevelopment())
+            {
+                MigrateDatabase(connection);
+            }
 
             services.AddMvc(options =>
             {

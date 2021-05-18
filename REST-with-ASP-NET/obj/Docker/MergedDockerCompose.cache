@@ -28,7 +28,7 @@ services:
       db:
         condition: service_started
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_ENVIRONMENT: Development
       TZ: America/Sao_Paulo
     image: rest-with-asp-net
     networks:

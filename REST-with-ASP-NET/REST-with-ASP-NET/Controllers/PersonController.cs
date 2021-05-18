@@ -29,9 +29,9 @@ namespace REST_with_ASP_NET.Controllers
 
         [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
-        [ProducesResponseType((204), Type = typeof(List<PersonVO>))]
-        [ProducesResponseType((400), Type = typeof(List<PersonVO>))]
-        [ProducesResponseType((401), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get([FromQuery]
             string name,

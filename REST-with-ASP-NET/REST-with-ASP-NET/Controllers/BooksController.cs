@@ -5,6 +5,7 @@ using REST_with_ASP_NET.Business;
 using REST_with_ASP_NET.Data.VO;
 using REST_with_ASP_NET.Hypermedia.Filters;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace REST_with_ASP_NET.Controllers
 {
@@ -25,13 +26,25 @@ namespace REST_with_ASP_NET.Controllers
             _booksBusiness = booksBusiness;
         }
 
-        [HttpGet]
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
+        [ProducesResponseType((200), Type = typeof(List<BooksVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get()
+        public IActionResult Get(
+            [FromQuery] string title,
+            string sortDirection,
+            int pageSize,
+            int page)
         {
-            return Ok(_booksBusiness.FindAll());
+            return Ok(_booksBusiness.FindWithPagedSearch(title, sortDirection, pageSize, page));
         }
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(BooksVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
