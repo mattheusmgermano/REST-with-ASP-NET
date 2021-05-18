@@ -89,12 +89,14 @@ export default function NewBook(){
                         placeholder="Título"
                         value={title}
                         onChange={e => setTitle(e.target.value)}
+                        required
                     />
                     <input 
                         placeholder="Autor"
                         
                         value={author}
                         onChange={e => setAuthor(e.target.value)}
+                        required
                     />
                     <input 
                         type="date"
@@ -107,6 +109,7 @@ export default function NewBook(){
                         
                         value={price}
                         onChange={e => setPrice(e.target.value)}
+                        required
                     />
 
                     <button className="button" type="submit">{bookId === '0'? 'Add' : 'Update'}</button>
