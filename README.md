@@ -12,7 +12,7 @@ Neste estudo também tentei subir a aplicação para o Docker usando o powershel
 
 É a minha primeira API em um mês de estudos de C# então é evidente que hajam erros - mas serão fixados no futuro.
 
-**To do:**
+**To do:**\
 :grey_exclamation: Sistema de cadastro de usuários\
 :grey_exclamation: Tela de pagamento\
 :grey_exclamation: Compartilhar livros\
